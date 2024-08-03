@@ -277,6 +277,7 @@ impl Texture {
 pub struct RendererConfig<'s> {
     pub texture_format: TextureFormat,
     pub depth_format: Option<TextureFormat>,
+    pub font_atlas_format: Option<TextureFormat>,
     pub sample_count: u32,
     pub shader: Option<ShaderModuleDescriptor<'s>>,
     pub vertex_shader_entry_point: Option<&'s str>,
@@ -289,6 +290,7 @@ impl<'s> RendererConfig<'s> {
         RendererConfig {
             texture_format: TextureFormat::Rgba8Unorm,
             depth_format: None,
+            font_atlas_format: None,
             sample_count: 1,
             shader: Some(shader),
             vertex_shader_entry_point: Some(VS_ENTRY_POINT),
@@ -362,6 +364,7 @@ impl Renderer {
         let RendererConfig {
             texture_format,
             depth_format,
+            font_atlas_format,
             sample_count,
             shader,
             vertex_shader_entry_point,
@@ -505,6 +508,7 @@ impl Renderer {
             config: RendererConfig {
                 texture_format,
                 depth_format,
+                font_atlas_format,
                 sample_count,
                 shader: None,
                 vertex_shader_entry_point: None,
@@ -785,6 +789,7 @@ impl Renderer {
                 height: handle.height,
                 ..Default::default()
             },
+            format: self.config.font_atlas_format,
             ..Default::default()
         };
 
